@@ -1,0 +1,58 @@
+#------------------------------------------------------------
+#        Script MySQL.
+#------------------------------------------------------------
+
+
+#------------------------------------------------------------
+# Table: DISTRIBUTEUR
+#------------------------------------------------------------
+
+CREATE TABLE DISTRIBUTEUR(
+        idDistributeur  Varchar (100) NOT NULL ,
+        nomDistributeur Varchar (300) ,
+        PRIMARY KEY (idDistributeur )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: COMMANDE
+#------------------------------------------------------------
+
+CREATE TABLE COMMANDE(
+        idCommande          Varchar (100) NOT NULL ,
+        conditionnement     Varchar (100) ,
+        quantite            Int ,
+        dateConditionnement Date ,
+        dateEnvoi           Date ,
+        idDistributeur      Varchar (100) ,
+        idProduit           Varchar (100) ,
+        PRIMARY KEY (idCommande )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: PRODUIT
+#------------------------------------------------------------
+
+CREATE TABLE PRODUIT(
+        idProduit Varchar (100) NOT NULL ,
+        variete   Varchar (100) ,
+        type      Varchar (100) ,
+        calibre   Int ,
+        PRIMARY KEY (idProduit )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: utilisateurs
+#------------------------------------------------------------
+
+CREATE TABLE utilisateurs(
+        matricule  Varchar (25) NOT NULL ,
+        login      Varchar (25) ,
+        motdepasse Varchar (25) ,
+        PRIMARY KEY (matricule )
+)ENGINE=InnoDB;
+
+ALTER TABLE COMMANDE ADD CONSTRAINT FK_COMMANDE_idDistributeur FOREIGN KEY (idDistributeur) REFERENCES DISTRIBUTEUR(idDistributeur);
+ALTER TABLE COMMANDE ADD CONSTRAINT FK_COMMANDE_idProduit FOREIGN KEY (idProduit) REFERENCES PRODUIT(idProduit);
