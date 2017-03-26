@@ -5,6 +5,8 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 public class GestionClique implements MouseListener{
+	
+	private static PersistanceSQL sql = new PersistanceSQL("localhost", 0, "gestioncommandesagrur", "root", "root");
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -15,7 +17,8 @@ public class GestionClique implements MouseListener{
 	@Override
 	public void mouseEntered(MouseEvent e) {
 				
-					
+			
+		
 	}
 
 	@Override
@@ -34,19 +37,14 @@ public class GestionClique implements MouseListener{
 			String nom_utilisateur = PageConnexion.getInputUtilisateur().getText();			
 			Main.getPageConnexion();			
 			String mot_de_passe = PageConnexion.getInputMotDePasse().getText();	
-			PersistanceSQL sql = new PersistanceSQL("localhost", 0, "gestioncommandesagrur", "root", "root");
 			try
 			{
 				if(sql.connexion(nom_utilisateur,mot_de_passe))
-				{
+				{				
 					PagePrincipale principale = new PagePrincipale();
 			    	Main.getPageConnexion();
 					PageConnexion.setIdentifiant(nom_utilisateur);
-					Main.getPageConnexion().hide();	
-					PagePrincipale.setGestionCommande(new GestionCommandes(sql));
-					PagePrincipale.getGestionCommandes().getPersistance().chargerListeDistributeurMenuDistributeurs();	
-					PagePrincipale.getGestionCommandes().getPersistance().chargerListeCommandesMenuCommandes();
-					PagePrincipale.getGestionCommandes().getPersistance().chargerListeProduitsMenuProduits();
+					Main.getPageConnexion().dispose();	
 				}
 				else
 				{
@@ -54,47 +52,49 @@ public class GestionClique implements MouseListener{
 				}
 			}
 			catch(Exception ex)
-                        {
-                                System.out.println(ex);
-				JOptionPane.showMessageDialog(null, "Impossible de s'authentifier Ã  la base de donÃ©es.\nVeuillez vÃ©rifer votre connexion internet","Gestion des commandes",JOptionPane.ERROR_MESSAGE);
+            {
+                System.out.println(ex);
+				JOptionPane.showMessageDialog(null, "Impossible de s'authentifier à  la base de donées.\nVeuillez vérifer votre connexion internet relancez l'application","Gestion des commandes",JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		if(e.getSource() instanceof BoutonDistributeur)
 		{
 			try
-			{
-				PagePrincipale.getDistributeursBouton().bouttonClique();		
-				PagePrincipale.chargerMenu("distributeurs");
-				EcouteurListe.initialiserDistributeursMenuDistributeurs();
-				EcouteurListe.initialiserCommandesMenuDistributeurs();
-
+			{			
+				PagePrincipale.getDistributeursBouton().bouttonClique();
+				PageDistributeurs page_distributeurs = new PageDistributeurs();				
 			}
 			catch(Exception ex)
 			{
-				JOptionPane.showMessageDialog(null, "Impossible d'afficher le menu des distributeurs.\nVeuillez vÃ©rifer votre connexion internet","Gestion des commandes",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Impossible d'afficher le menu des distributeurs.\nVeuillez vérifer votre connexion internet puis relancez l'application.","Gestion des commandes",JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		if(e.getSource() instanceof BoutonCommandes)
 		{
 			try
-			{
+			{			
 				PagePrincipale.getCommandesBouton().bouttonClique();
-				PagePrincipale.chargerMenu("commandes");
-				EcouteurListe.initialiserCommandesMenuCommandes();
-				
-				
+				PageCommandes page_commandes = new PageCommandes();				
 			}
 			catch(Exception ex)
 			{
-				JOptionPane.showMessageDialog(null, "Impossible d'afficher le menu des commandes.\nVeuillez vÃ©rifer votre connexion internet","Gestion des commandes",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Impossible d'afficher le menu des commandes.\nVeuillez vérifer votre connexion internet puis relancez l'application.","Gestion des commandes",JOptionPane.ERROR_MESSAGE);
 			}
+			
 		}
 		if(e.getSource() instanceof BoutonProduits)
-		{
-			PagePrincipale.getProduitsBouton().bouttonClique();
-			PagePrincipale.chargerMenu("produits");
-			EcouteurListe.initialiserProduitsMenuProduits();
+		{	
+			try
+			{			
+				PagePrincipale.getProduitsBouton().bouttonClique();
+				PageProduits page_produits = new PageProduits();				
+			}
+			catch(Exception ex)
+			{
+				JOptionPane.showMessageDialog(null, "Impossible d'afficher le menu des produits.\nVeuillez vérifer votre connexion internet puis relancez l'application.","Gestion des commandes",JOptionPane.ERROR_MESSAGE);
+			}
 		}
+
 	}
 	
 	@Override
@@ -107,6 +107,7 @@ public class GestionClique implements MouseListener{
 		if(e.getSource() instanceof BoutonDistributeur)
 		{
 			PagePrincipale.getDistributeursBouton().bouttonNormal();
+			
 		}
 		if(e.getSource() instanceof BoutonCommandes)
 		{
@@ -117,4 +118,9 @@ public class GestionClique implements MouseListener{
 			PagePrincipale.getProduitsBouton().bouttonNormal();
 		}
 	}
+	public static PersistanceSQL getSQL()
+	{
+		return sql;
+	}	
+				
 }

@@ -6,7 +6,6 @@ public class BoutonCommandes extends JButton {
 	public BoutonCommandes()
 	{
 		setIcon(new ImageIcon(GestionRessources.getCommandesBouton()));
-		addMouseListener(new GestionClique());
 		setBorder(null);
 	}
 	public void bouttonClique()

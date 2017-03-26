@@ -2,6 +2,7 @@
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public  class GestionRessources {
@@ -20,6 +21,9 @@ public  class GestionRessources {
 	private static BufferedImage distributeursBoutonHover;
 	private static BufferedImage commandesBoutonHover;
 	private static BufferedImage produitsBoutonHover;
+	private static BufferedImage genererXML;
+	private static BufferedImage genererXMLHover;
+
 	
 	public  void chargerImages()
 	{
@@ -38,7 +42,10 @@ public  class GestionRessources {
 			distributeursBoutonHover = ImageIO.read(getClass().getResourceAsStream("images/distributeursHover.png"));
 			commandesBoutonHover = ImageIO.read(getClass().getResourceAsStream("images/commandesHover.png"));
 			produitsBoutonHover = ImageIO.read(getClass().getResourceAsStream("images/produitsHover.png"));
-			System.out.println("Chargement terminÃ©");
+			genererXML = ImageIO.read(getClass().getResourceAsStream("images/genererXML.png"));
+			genererXMLHover = ImageIO.read(getClass().getResourceAsStream("images/genererXMLHover.png"));
+
+			System.out.println("Chargement effectué");
 			pageChargement.hide();
 			pageChargement.finirChargement();
 		}
@@ -92,6 +99,14 @@ public  class GestionRessources {
 	public static BufferedImage getProduitsBoutonHover()
 	{
 		return produitsBoutonHover;
+	}
+	public static BufferedImage getGenererXML()
+	{
+		return genererXML;
+	}
+	public static BufferedImage getGenererXMLHover()
+	{
+		return genererXMLHover;
 	}
 	
 }

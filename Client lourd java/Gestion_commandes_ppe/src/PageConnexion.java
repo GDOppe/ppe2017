@@ -1,6 +1,11 @@
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 
 public class PageConnexion extends JFrame{
 
@@ -13,8 +18,7 @@ public class PageConnexion extends JFrame{
 	public PageConnexion()
 	{
 		initPanel();
-		initialiserPositions();
-		this.setTitle("Agrur - Gestion des commandes");
+		this.setTitle("Agrur - Gestion des commandes - Connexion");
 		this.setSize(600, 600);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,11 +53,7 @@ public class PageConnexion extends JFrame{
 		input_mot_de_passe.setBorder(null);
 		input_mot_de_passe.setFont(new Font("Calibri",0,20));
 		input_mot_de_passe.setForeground(new Color(199, 207, 0));
-				
-	}
-	
-	public void initialiserPositions()
-	{
+		
 		input_utilisateur.setBounds(215,176,165,30);
 		input_mot_de_passe.setBounds(215,285,165,30);
 		bouton_connexion.setBounds(207,400,180,45);
@@ -61,8 +61,8 @@ public class PageConnexion extends JFrame{
 		panel.add(input_utilisateur);
 		panel.add(input_mot_de_passe);
 		panel.add(bouton_connexion);
+				
 	}
-	
 	
 	public static BoutonConnexion getConnexion()
 	{

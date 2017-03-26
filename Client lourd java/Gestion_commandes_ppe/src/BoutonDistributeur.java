@@ -6,7 +6,6 @@ public class BoutonDistributeur extends JButton{
 	public BoutonDistributeur()
 	{
 		setIcon(new ImageIcon(GestionRessources.getDistributeursBouton()));
-		addMouseListener(new GestionClique());
 		setBorder(null);
 	}
 	public void bouttonClique()

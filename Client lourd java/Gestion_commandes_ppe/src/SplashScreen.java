@@ -3,7 +3,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -27,9 +26,9 @@ public class SplashScreen extends JFrame{
                 {
                     g.setColor(new Color(48, 48, 48));
                     g.fillRect(0, 0, this.getWidth(), this.getHeight());
-                    g.setFont(new Font("Verdana",0,35));
+                    g.setFont(new Font("Verdana",0,30));
                     g.setColor(new Color(112, 141, 35));
-                    g.drawString("Agrur - Gestion de commandes", 25, 50);
+                    g.drawString("Agrur - Gestion de commandes XML", 25, 50);
                     g.setFont(new Font("Verdana",0,15));
                     g.setColor(new Color(186, 186, 186));
                     g.drawString("Chargement en cours "+progressionChargement, 25, 100);
@@ -38,7 +37,7 @@ public class SplashScreen extends JFrame{
                     g.drawString("Version 1.0", 500, 250);
                     g.setFont(new Font("Verdana",0,10));
                     g.setColor(new Color(158, 158, 158));
-                    g.drawString("DÃ©veloppÃ© par Giaquinto R, Ostrowski B, Dubrulle G", 25, 250);
+                    g.drawString("Développé par Giaquinto R, Ostrowski B, Dubrulle G", 25, 250);
                 }
             });
             setVisible(true);	
@@ -63,7 +62,7 @@ public class SplashScreen extends JFrame{
                             progressionChargement ="";
 			}	
                         secondesChargement ++;
-                        System.out.println("Elapsed time: "+secondesChargement +" s");
+                        System.out.println("Temps écoulé: "+secondesChargement +" s");
                         getContentPane().repaint();	                                     
                     }
                     else

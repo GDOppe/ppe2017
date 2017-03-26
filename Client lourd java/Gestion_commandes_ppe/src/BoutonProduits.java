@@ -6,7 +6,6 @@ public class BoutonProduits extends JButton {
 	public BoutonProduits()
 	{
 		setIcon(new ImageIcon(GestionRessources.getProduitsBouton()));
-		addMouseListener(new GestionClique());
 		setBorder(null);
 	}
 	public void bouttonClique()

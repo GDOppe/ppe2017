@@ -5,6 +5,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import javax.swing.JComboBox;
+
 
 public class PersistanceSQL {
 
@@ -39,46 +41,52 @@ public class PersistanceSQL {
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void chargerListeDistributeurMenuDistributeurs() throws Exception
+	public JComboBox<String> chargerListeDistributeurs() throws Exception
 	{
+		JComboBox<String> liste_distributeurs = new JComboBox<>();
+		
 		String selection = "SELECT * FROM distributeur";
 		resultat = etat.executeQuery(selection);
 		
-		Vector vecteur = new Vector();
 		while(resultat.next())
 		{
 			String id_distributeur = resultat.getString("idDistributeur");
-			vecteur.add(id_distributeur);		
+			liste_distributeurs.addItem(id_distributeur);
 		}
-		PagePrincipale.setListeDistributeursMenuDistributeurs(vecteur);
+		return liste_distributeurs;		
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void chargerListeCommandesMenuCommandes() throws Exception
+	public JComboBox<String> chargerListeCommandes() throws Exception
 	{
+		JComboBox<String> liste_commandes = new JComboBox<>();
+		
 		String selection = "SELECT * FROM commande";
 		resultat = etat.executeQuery(selection);
-		Vector vecteur = new Vector();
+		
 		while(resultat.next())
 		{
 			String id_commande = resultat.getString("idCommande");
-			vecteur.add(id_commande);
+			liste_commandes.addItem(id_commande);
 		}
-		PagePrincipale.setListeCommandesMenuCommandes(vecteur);
+		return liste_commandes;		
 	}
-	public void chargerListeProduitsMenuProduits() throws Exception
+	
+	public JComboBox<String> chargerListeProduits() throws Exception
 	{
+		JComboBox<String> liste_produits = new JComboBox<>();
+		
 		String selection = "SELECT * FROM produit";
 		resultat = etat.executeQuery(selection);
 		
-		Vector vecteur = new Vector();
 		while(resultat.next())
 		{
 			String id_produit = resultat.getString("idProduit");
-			vecteur.add(id_produit);		
+			liste_produits.addItem(id_produit);
 		}
-		PagePrincipale.setListeProduitsMenuProduits(vecteur);
+		return liste_produits;		
 	}
+	
+	
 	public Object chargerBase(String id, String nom_classe) throws Exception
 	{
 		Object objet_charge = new Object();
@@ -180,5 +188,9 @@ public class PersistanceSQL {
     	}
     	return utilisateur_existant;
     	
+    }
+    public void fermerConnexion() throws Exception
+    {
+    	connexion_base.close();
     }
 }
