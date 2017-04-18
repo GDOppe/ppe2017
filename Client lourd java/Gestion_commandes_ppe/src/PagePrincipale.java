@@ -1,7 +1,10 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.Date;
+
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class PagePrincipale extends JFrame{
@@ -12,9 +15,12 @@ public class PagePrincipale extends JFrame{
 	private static BoutonProduits bouton_produits;
 	private static String menu_courant;
 	private static GestionClique clique = new GestionClique();
-	
+	private static PersistanceSQL sql;
+
+
 	public PagePrincipale()
 	{
+		initConnexion();
 		initPanel();
 		initialiserPositions();
 		this.setTitle("Agrur - Gestion des commandes XML");
@@ -28,7 +34,7 @@ public class PagePrincipale extends JFrame{
 		this.setVisible(true);
 		
 	}
-	public void initPanel()
+	private void initPanel()
 	{
 		panel = new JPanel()
 		{
@@ -38,7 +44,7 @@ public class PagePrincipale extends JFrame{
 				g.drawImage(GestionRessources.getPrincipale(), 0, 0, this.getWidth(),this.getHeight(),null);
 				g.setColor(new Color(199, 207, 0));
 				g.setFont(new Font("Verdana",0,25));
-				g.drawString(PageConnexion.getIdentifiant(), 85, 45);			
+				g.drawString("Bienvenue", 85, 45);			
 			}
 		};
 		
@@ -51,7 +57,7 @@ public class PagePrincipale extends JFrame{
 		
 	}
 	
-	public void initialiserPositions()
+	private void initialiserPositions()
 	{	
 		bouton_distributeur.setBounds(5, 150, 150, 50);	
 		bouton_commandes.setBounds(5, 300, 150, 50);
@@ -79,6 +85,21 @@ public class PagePrincipale extends JFrame{
 	public static BoutonProduits getProduitsBouton()
 	{
 		return bouton_produits;
+	}
+	public static PersistanceSQL getSQL()
+	{
+		return sql;
+	}
+	private void initConnexion()
+	{
+		try
+		{
+			sql = new PersistanceSQL("localhost", 0, "vdev", "root", "root");			
+		}
+		catch(Exception ex)
+		{
+			JOptionPane.showMessageDialog(null, "Impossible de se connecter à la base de données.\nVeuillez vérifer votre connexion internet puis relancez l'application.","Gestion des commandes",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 		
 }

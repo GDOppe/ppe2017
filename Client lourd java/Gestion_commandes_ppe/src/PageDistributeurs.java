@@ -20,7 +20,6 @@ public class PageDistributeurs extends JFrame{
 	private JLabel date_conditionnement_commande_courante;
 	private JLabel date_envoi_commande_courante;
 	private JLabel quantite_commande_courante;
-	private JLabel id_produit_commande_courante;
 	private JLabel variete_produit_commande_courante;
 	private JLabel type_produit_commande_courante;
 	private JLabel calibre_produit_commande_courante;
@@ -59,8 +58,8 @@ public class PageDistributeurs extends JFrame{
 		
 		panel.setLayout(null);
 		
-		this.liste_distributeurs_page_distributeurs = new GestionCommandes(GestionClique.getSQL()).getPersistance().chargerListeDistributeurs();
-		distributeur_courant = (Distributeur)new GestionCommandes(GestionClique.getSQL()).getPersistance().chargerBase(liste_distributeurs_page_distributeurs.getSelectedItem().toString(),"Distributeur");
+		this.liste_distributeurs_page_distributeurs = new GestionCommandes(PagePrincipale.getSQL()).getPersistance().chargerListeDistributeurs();
+		distributeur_courant = (Distributeur)new GestionCommandes(PagePrincipale.getSQL()).getPersistance().chargerBase(liste_distributeurs_page_distributeurs.getSelectedItem().toString(),"Distributeur");
 		
 		for(Commande commande: distributeur_courant.getCommandes())
 		{
@@ -98,9 +97,6 @@ public class PageDistributeurs extends JFrame{
 		quantite_commande_courante.setFont(police_distributeur);
 		quantite_commande_courante.setForeground(couleur_police);
 		
-		id_produit_commande_courante = new JLabel("Id du produit:");
-		id_produit_commande_courante.setFont(police_distributeur);
-		id_produit_commande_courante.setForeground(couleur_police);
 		
 		variete_produit_commande_courante = new JLabel("Variété:");
 		variete_produit_commande_courante.setFont(police_distributeur);
@@ -126,7 +122,6 @@ public class PageDistributeurs extends JFrame{
 		date_conditionnement_commande_courante.setBounds(20, 140, 350, 20);
 		date_envoi_commande_courante.setBounds(20, 180, 250, 20);
 		quantite_commande_courante.setBounds(20, 220, 250, 20);
-		id_produit_commande_courante.setBounds(20,260,250,20);
 		variete_produit_commande_courante.setBounds(20,300,250,20);
 		type_produit_commande_courante.setBounds(20,340,250,20);
 		calibre_produit_commande_courante.setBounds(20,380,250,20);		
@@ -144,7 +139,7 @@ public class PageDistributeurs extends JFrame{
 					{
 						liste_commandes_page_distributeurs.removeAllItems();
 					}
-					distributeur_courant = (Distributeur)new GestionCommandes(GestionClique.getSQL()).getPersistance().chargerBase(liste_distributeurs_page_distributeurs.getSelectedItem().toString(),"Distributeur");
+					distributeur_courant = (Distributeur)new GestionCommandes(PagePrincipale.getSQL()).getPersistance().chargerBase(liste_distributeurs_page_distributeurs.getSelectedItem().toString(),"Distributeur");
 					nom_distributeur.setText("Nom: "+distributeur_courant.getNom());
 					for(Commande commande: distributeur_courant.getCommandes())
 					{
@@ -185,7 +180,6 @@ public class PageDistributeurs extends JFrame{
 		panel.add(date_conditionnement_commande_courante);
 		panel.add(date_envoi_commande_courante);
 		panel.add(quantite_commande_courante);
-		panel.add(id_produit_commande_courante);
 		panel.add(variete_produit_commande_courante);
 		panel.add(type_produit_commande_courante);
 		panel.add(calibre_produit_commande_courante);
@@ -203,7 +197,6 @@ public class PageDistributeurs extends JFrame{
 					date_conditionnement_commande_courante.setText("Date de conditionnement: "+commande.getDateConditionnement());
 					date_envoi_commande_courante.setText("Date d'envoi: "+commande.getDateEnvoi());
 					quantite_commande_courante.setText("Quantité: "+commande.getQuantite());
-					id_produit_commande_courante.setText("Id du produit: "+commande.getProduit().getId());
 					variete_produit_commande_courante.setText("Variété: "+commande.getProduit().getVariete());
 					type_produit_commande_courante.setText("Type: "+commande.getProduit().getType());
 					calibre_produit_commande_courante.setText("Calibre: "+commande.getProduit().getCalibre());

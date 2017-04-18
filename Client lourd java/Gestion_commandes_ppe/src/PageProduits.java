@@ -25,7 +25,7 @@ public class PageProduits extends JFrame {
 	{
 		liste_produits_menu_produits = new JComboBox<>();
 		initPanel();	
-		this.setTitle("Produits enregistrés");
+		this.setTitle("Produits commandés");
 		this.setSize(600, 250);
 		this.setResizable(false);
 		this.setLocationRelativeTo(this.getParent());
@@ -48,14 +48,14 @@ public class PageProduits extends JFrame {
 		
 		panel.setLayout(null);
 		
-		this.liste_produits_menu_produits = new GestionCommandes(GestionClique.getSQL()).getPersistance().chargerListeProduits();
-		produit_courant = (Produit)new GestionCommandes(GestionClique.getSQL()).getPersistance().chargerBase(liste_produits_menu_produits.getSelectedItem().toString(),"Produit");
+		this.liste_produits_menu_produits = new GestionCommandes(PagePrincipale.getSQL()).getPersistance().chargerListeProduits();
+		produit_courant = (Produit)new GestionCommandes(PagePrincipale.getSQL()).getPersistance().chargerBase(liste_produits_menu_produits.getSelectedItem().toString(),"Produit");
 		
 		
 		police_distributeur = new Font("Verdana",0,18);
 		couleur_police = new Color(185, 236, 0);
 		
-		id_produit = new JLabel("Id:");
+		id_produit = new JLabel("Id commande:");
 		id_produit.setFont(police_distributeur);
 		id_produit.setForeground(couleur_police);
 		
@@ -72,7 +72,7 @@ public class PageProduits extends JFrame {
 		calibre_produit_menu_produits.setForeground(couleur_police);
 	
 		id_produit.setBounds(20,20,200,20);
-		liste_produits_menu_produits.setBounds(60, 20, 150, 20);
+		liste_produits_menu_produits.setBounds(160, 20, 150, 20);
 		type_produit_menu_produits.setBounds(20, 60, 300, 25);
 		variete_produit_menu_produits.setBounds(20, 100, 300, 25);
 		calibre_produit_menu_produits.setBounds(20, 140, 300, 25);
@@ -84,7 +84,7 @@ public class PageProduits extends JFrame {
 				
 				try
 				{
-					produit_courant = (Produit)new GestionCommandes(GestionClique.getSQL()).getPersistance().chargerBase(liste_produits_menu_produits.getSelectedItem().toString(),"Produit");
+					produit_courant = (Produit)new GestionCommandes(PagePrincipale.getSQL()).getPersistance().chargerBase(liste_produits_menu_produits.getSelectedItem().toString(),"Produit");
 					variete_produit_menu_produits.setText("Variété: "+produit_courant.getVariete());					
 					type_produit_menu_produits.setText("Type: "+produit_courant.getType());
 					calibre_produit_menu_produits.setText("Calibre: "+produit_courant.getCalibre());

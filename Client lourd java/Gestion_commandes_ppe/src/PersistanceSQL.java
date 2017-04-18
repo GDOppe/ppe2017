@@ -21,7 +21,7 @@ public class PersistanceSQL {
 	private String utilisateur;
 	private String motDePasse;
 	
-	public PersistanceSQL(String ip_base, int port, String nom_base, String utilisateur, String motDePasse)
+	public PersistanceSQL(String ip_base, int port, String nom_base, String utilisateur, String motDePasse) throws Exception
 	{
 	    
 	    this.ip_base = ip_base;               
@@ -37,21 +37,26 @@ public class PersistanceSQL {
 	    {
 	    	 this.serveur ="jdbc:mysql://"+this.ip_base+":"+this.port+"/"+this.nom_base+"?useSSL=false";
 	    }   
+	    
+	    Class.forName("com.mysql.jdbc.Driver");   
+    	connexion_base = DriverManager.getConnection(this.serveur,this.utilisateur,this.motDePasse);  	
+    	etat = connexion_base.createStatement(); 
+    	
 	          
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public JComboBox<String> chargerListeDistributeurs() throws Exception
 	{
+		
 		JComboBox<String> liste_distributeurs = new JComboBox<>();
 		
-		String selection = "SELECT * FROM distributeur";
-		resultat = etat.executeQuery(selection);
+		resultat = etat.executeQuery("select * from distributeur");
 		
 		while(resultat.next())
 		{
 			String id_distributeur = resultat.getString("idDistributeur");
-			liste_distributeurs.addItem(id_distributeur);
+			liste_distributeurs.addItem(id_distributeur);		
 		}
 		return liste_distributeurs;		
 	}
@@ -75,12 +80,12 @@ public class PersistanceSQL {
 	{
 		JComboBox<String> liste_produits = new JComboBox<>();
 		
-		String selection = "SELECT * FROM produit";
+		String selection = "SELECT * FROM commande";
 		resultat = etat.executeQuery(selection);
 		
 		while(resultat.next())
 		{
-			String id_produit = resultat.getString("idProduit");
+			String id_produit = resultat.getString("idCommande");
 			liste_produits.addItem(id_produit);
 		}
 		return liste_produits;		
@@ -94,7 +99,9 @@ public class PersistanceSQL {
 		
 		switch(nom_classe)
 		{
+			
 			case("Distributeur"):
+				
 				Distributeur distributeur = null;
 				String selection_distributeur = "SELECT * FROM distributeur WHERE idDistributeur = '"+id+"'";
 	    		resultat = etat.executeQuery(selection_distributeur);
@@ -106,12 +113,12 @@ public class PersistanceSQL {
 	    		if(objet_existant)
 	    		{
 	    			ArrayList<Commande> liste_commandes = new ArrayList<>();
-					String selection_commandes = "SELECT * FROM commande as c, produit as p WHERE c.idDistributeur = '"+distributeur.getId()+"' and p.idProduit = c.idProduit";
+					String selection_commandes = "SELECT * FROM commande WHERE idDistributeur = '"+distributeur.getId()+"'";
 					resultat = etat.executeQuery(selection_commandes);
 					while(resultat.next())
 					{
-						Commande commande = new Commande(resultat.getString("idCommande"),resultat.getString("conditionnement"),resultat.getInt("quantite"),resultat.getDate("dateConditionnement"),resultat.getDate("dateEnvoi"),resultat.getString("idDistributeur"));
-						Produit le_produit = new Produit(resultat.getString("idProduit"),resultat.getString("variete"),resultat.getString("type"),resultat.getInt("calibre"));
+						Commande commande = new Commande(resultat.getString("idCommande"),resultat.getString("typeCond"),resultat.getInt("quantite"),resultat.getDate("dateCond"),resultat.getDate("dateLiv"),resultat.getString("idDistributeur"));
+						Produit le_produit = new Produit(resultat.getString("varieteNoix"),resultat.getString("typeProduit"),resultat.getInt("calibre"));
 						commande.setProduit(le_produit);
 						liste_commandes.add(commande);
 						
@@ -132,17 +139,17 @@ public class PersistanceSQL {
 				resultat = etat.executeQuery(selection_commandes);
 				while(resultat.next())
 				{			
-	    			commande = new Commande(resultat.getString("idCommande"), resultat.getString("conditionnement"), resultat.getInt("quantite"), resultat.getDate("dateConditionnement"), resultat.getDate("dateEnvoi"),resultat.getString("idDistributeur"));
+	    			commande = new Commande(resultat.getString("idCommande"), resultat.getString("typeCond"), resultat.getInt("quantite"), resultat.getDate("dateCond"), resultat.getDate("dateLiv"),resultat.getString("idDistributeur"));
 	    			objet_existant = true;
 	    		}
 				if(objet_existant)
 				{
-					String selection_produit = "SELECT * FROM commande as c, produit as p WHERE c.idCommande = '"+commande.getId()+"' and p.idProduit = c.idProduit";
+					String selection_produit = "SELECT * FROM commande  WHERE idCommande = '"+commande.getId()+"'";
 					resultat = etat.executeQuery(selection_produit);
 					Produit le_produit = null;
 					while(resultat.next())
 					{
-						le_produit = new Produit(resultat.getString("idProduit"),resultat.getString("variete"),resultat.getString("type"),resultat.getInt("calibre"));
+						le_produit = new Produit(resultat.getString("varieteNoix"),resultat.getString("typeProduit"),resultat.getInt("calibre"));
 					}
 					commande.setProduit(le_produit);
 					objet_charge = commande;
@@ -154,13 +161,13 @@ public class PersistanceSQL {
 			break;
 			case("Produit"):
 				Produit produit = null;
-				String selection_produit = "SELECT * FROM produit WHERE idProduit = '"+id+"'";
+				String selection_produit = "SELECT * FROM commande WHERE idCommande = '"+id+"'";
 				resultat = etat.executeQuery(selection_produit);
 				while(resultat.next())
 				{	
-					produit = new Produit(resultat.getString("idProduit"), resultat.getString("variete"), resultat.getString("type"), resultat.getInt("calibre"));
-                                        objet_existant = true;
-                                }
+					produit = new Produit(resultat.getString("varieteNoix"), resultat.getString("typeProduit"), resultat.getInt("calibre"));
+                    objet_existant = true;
+                }
 				if(objet_existant)
 				{
 					objet_charge = produit;
@@ -171,24 +178,6 @@ public class PersistanceSQL {
 		
 	}
 	
-    public boolean connexion(String nom_utilisateur, String mot_de_passe) throws Exception
-    {		
-    	boolean utilisateur_existant = false;
-    	Class.forName("com.mysql.jdbc.Driver"); 
-   
-    	connexion_base = DriverManager.getConnection(this.serveur,this.utilisateur,this.motDePasse);
-    	
-    	etat = connexion_base.createStatement(); 
-    	
-    	String selection_utilisateur = "SELECT * FROM utilisateurs WHERE login = '"+nom_utilisateur+"' and motdepasse = '"+mot_de_passe+"'";
-    	resultat = etat.executeQuery(selection_utilisateur);
-    	while(resultat.next())
-    	{
-    		utilisateur_existant = true;
-    	}
-    	return utilisateur_existant;
-    	
-    }
     public void fermerConnexion() throws Exception
     {
     	connexion_base.close();

@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 
 public class GestionClique implements MouseListener{
 	
-	private static PersistanceSQL sql = new PersistanceSQL("localhost", 0, "gestioncommandesagrur", "root", "root");
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -30,33 +29,6 @@ public class GestionClique implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent e) {
 				
-		if(e.getSource() instanceof BoutonConnexion)
-		{
-			PageConnexion.getConnexion().bouttonClique();
-			Main.getPageConnexion();
-			String nom_utilisateur = PageConnexion.getInputUtilisateur().getText();			
-			Main.getPageConnexion();			
-			String mot_de_passe = PageConnexion.getInputMotDePasse().getText();	
-			try
-			{
-				if(sql.connexion(nom_utilisateur,mot_de_passe))
-				{				
-					PagePrincipale principale = new PagePrincipale();
-			    	Main.getPageConnexion();
-					PageConnexion.setIdentifiant(nom_utilisateur);
-					Main.getPageConnexion().dispose();	
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(null, "Nom d'utilisateur ou mot de passe non valide","Gestion des commandes",JOptionPane.ERROR_MESSAGE);
-				}
-			}
-			catch(Exception ex)
-            {
-                System.out.println(ex);
-				JOptionPane.showMessageDialog(null, "Impossible de s'authentifier à  la base de donées.\nVeuillez vérifer votre connexion internet relancez l'application","Gestion des commandes",JOptionPane.ERROR_MESSAGE);
-			}
-		}
 		if(e.getSource() instanceof BoutonDistributeur)
 		{
 			try
@@ -66,6 +38,7 @@ public class GestionClique implements MouseListener{
 			}
 			catch(Exception ex)
 			{
+				ex.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Impossible d'afficher le menu des distributeurs.\nVeuillez vérifer votre connexion internet puis relancez l'application.","Gestion des commandes",JOptionPane.ERROR_MESSAGE);
 			}
 		}
@@ -100,10 +73,6 @@ public class GestionClique implements MouseListener{
 	@Override
 	public void mouseReleased(MouseEvent e) {
 
-		if(e.getSource() instanceof BoutonConnexion)
-		{
-			PageConnexion.getConnexion().bouttonNormal();
-		}	
 		if(e.getSource() instanceof BoutonDistributeur)
 		{
 			PagePrincipale.getDistributeursBouton().bouttonNormal();
@@ -118,9 +87,6 @@ public class GestionClique implements MouseListener{
 			PagePrincipale.getProduitsBouton().bouttonNormal();
 		}
 	}
-	public static PersistanceSQL getSQL()
-	{
-		return sql;
-	}	
+		
 				
 }

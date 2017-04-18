@@ -8,13 +8,9 @@ import javax.swing.JOptionPane;
 public  class GestionRessources {
 	
 	//Images de fond
-	private static BufferedImage imageFondLogin;
 	private static BufferedImage principale;
-	private static BufferedImage logo;
-	
+	private static BufferedImage logo;	
 	//Boutons
-	private static BufferedImage connexionBouton;
-	private static BufferedImage connexionBoutonHover;
 	private static BufferedImage distributeursBouton;
 	private static BufferedImage commandesBouton;
 	private static BufferedImage produitsBouton;
@@ -31,11 +27,8 @@ public  class GestionRessources {
 		try
 		{
 			System.out.println("Chargement des images ...");
-			imageFondLogin = ImageIO.read(getClass().getResourceAsStream("images/imageFondLogin.png"));
 			principale = ImageIO.read(getClass().getResourceAsStream("images/principale.png"));
 			logo = ImageIO.read(getClass().getResourceAsStream("images/logo.png"));		
-			connexionBouton = ImageIO.read(getClass().getResourceAsStream("images/connexion.png"));
-			connexionBoutonHover = ImageIO.read(getClass().getResourceAsStream("images/connexionHover.png"));
 			distributeursBouton = ImageIO.read(getClass().getResourceAsStream("images/distributeurs.png"));
 			commandesBouton = ImageIO.read(getClass().getResourceAsStream("images/commandes.png"));
 			produitsBouton = ImageIO.read(getClass().getResourceAsStream("images/produits.png"));
@@ -59,18 +52,6 @@ public  class GestionRessources {
 	public static BufferedImage getLogo()
 	{
 		return logo;
-	}
-	public static BufferedImage getImageFondLogin()
-	{
-		return imageFondLogin;
-	}
-	public static BufferedImage getConnexionBouton()
-	{
-		return connexionBouton;
-	}
-	public static BufferedImage getConnexionBoutonHover()
-	{
-		return connexionBoutonHover;
 	}
 	public static BufferedImage getPrincipale()
 	{

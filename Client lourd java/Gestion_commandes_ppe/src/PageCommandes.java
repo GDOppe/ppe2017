@@ -18,7 +18,6 @@ public class PageCommandes extends JFrame{
 	private JLabel date_conditionnement_commande_courante;
 	private JLabel date_envoi_commande_courante;
 	private JLabel id_distributeur_commande_courante;
-	private JLabel id_produit_commande_courante;	
 	private JLabel variete_produit_commande_courante;
 	private JLabel type_produit_commande_courante;
 	private JLabel calibre_produit_commande_courante;
@@ -58,8 +57,8 @@ public class PageCommandes extends JFrame{
 		
 		panel.setLayout(null);
 		
-		this.liste_commandes_page_commandes = new GestionCommandes(GestionClique.getSQL()).getPersistance().chargerListeCommandes();
-		commande_courante = (Commande)new GestionCommandes(GestionClique.getSQL()).getPersistance().chargerBase(liste_commandes_page_commandes.getSelectedItem().toString(),"Commande");
+		this.liste_commandes_page_commandes = new GestionCommandes(PagePrincipale.getSQL()).getPersistance().chargerListeCommandes();
+		commande_courante = (Commande)new GestionCommandes(PagePrincipale.getSQL()).getPersistance().chargerBase(liste_commandes_page_commandes.getSelectedItem().toString(),"Commande");
 		
 		id_commande = new JLabel("Id:");
 		id_commande.setFont(police_distributeur);
@@ -85,10 +84,6 @@ public class PageCommandes extends JFrame{
 		id_distributeur_commande_courante.setFont(police_distributeur);
 		id_distributeur_commande_courante.setForeground(couleur_police);
 		
-		id_produit_commande_courante = new JLabel("Id du produit: "+commande_courante.getProduit().getId());
-		id_produit_commande_courante.setFont(police_distributeur);
-		id_produit_commande_courante.setForeground(couleur_police);
-		
 		variete_produit_commande_courante = new JLabel("Variété: "+commande_courante.getProduit().getVariete());
 		variete_produit_commande_courante.setFont(police_distributeur);
 		variete_produit_commande_courante.setForeground(couleur_police);
@@ -108,7 +103,6 @@ public class PageCommandes extends JFrame{
 		date_envoi_commande_courante.setBounds(20, 140, 350, 20);
 		quantite_commande_courante.setBounds(20, 180, 300, 20);
 		id_distributeur_commande_courante.setBounds(20, 220, 300, 20);
-		id_produit_commande_courante.setBounds(20, 260, 300, 20);
 		variete_produit_commande_courante.setBounds(20, 300, 300, 20);
 		type_produit_commande_courante.setBounds(20, 340, 300, 20);
 		calibre_produit_commande_courante.setBounds(20, 380, 300, 20);
@@ -120,13 +114,12 @@ public class PageCommandes extends JFrame{
 				
 				try
 				{
-					commande_courante = (Commande)new GestionCommandes(GestionClique.getSQL()).getPersistance().chargerBase(liste_commandes_page_commandes.getSelectedItem().toString(),"Commande");
+					commande_courante = (Commande)new GestionCommandes(PagePrincipale.getSQL()).getPersistance().chargerBase(liste_commandes_page_commandes.getSelectedItem().toString(),"Commande");
 					conditionnement_commande_courante.setText("Conditionnement: "+commande_courante.getConditionnement());
 					date_conditionnement_commande_courante.setText("Date de conditionnement: "+commande_courante.getDateConditionnement());	
 					date_envoi_commande_courante.setText("Date d'envoi: "+commande_courante.getDateEnvoi());		
 					quantite_commande_courante.setText("Quantité: "+commande_courante.getQuantite());
 					id_distributeur_commande_courante.setText("Distributeur associé: "+commande_courante.getIdDistributeur());
-					id_produit_commande_courante.setText("Id du produit: "+commande_courante.getProduit().getId());
 					variete_produit_commande_courante.setText("Variété: "+commande_courante.getProduit().getVariete());					
 					type_produit_commande_courante.setText("Type: "+commande_courante.getProduit().getType());			
 					calibre_produit_commande_courante.setText("Type: "+commande_courante.getProduit().getCalibre());
@@ -146,7 +139,6 @@ public class PageCommandes extends JFrame{
 		panel.add(date_envoi_commande_courante);
 		panel.add(quantite_commande_courante);
 		panel.add(id_distributeur_commande_courante);
-		panel.add(id_produit_commande_courante);
 		panel.add(variete_produit_commande_courante);
 		panel.add(type_produit_commande_courante);
 		panel.add(calibre_produit_commande_courante);
