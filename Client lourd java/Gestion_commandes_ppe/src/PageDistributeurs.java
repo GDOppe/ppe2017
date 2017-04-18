@@ -3,6 +3,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,9 +27,11 @@ public class PageDistributeurs extends JFrame{
 	private JLabel type_produit_commande_courante;
 	private JLabel calibre_produit_commande_courante;
 	private JPanel panel;	
+	private BoutonXML bouton_xml;
 	private Font police_distributeur;
 	private Color couleur_police;	
-	private Distributeur distributeur_courant;
+	private static Distributeur distributeur_courant;
+
 		
 	public PageDistributeurs() throws Exception
 	{			
@@ -40,7 +45,6 @@ public class PageDistributeurs extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setIconImage(GestionRessources.getLogo());
 		this.setContentPane(panel);		
-		this.setAlwaysOnTop(true);
 		this.setVisible(true);
 		
 	}
@@ -110,6 +114,50 @@ public class PageDistributeurs extends JFrame{
 		calibre_produit_commande_courante.setFont(police_distributeur);
 		calibre_produit_commande_courante.setForeground(couleur_police);
 		
+		bouton_xml = new BoutonXML();
+		bouton_xml.setBounds(500, 20, 64, 64);
+		bouton_xml.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+				bouton_xml.bouttonClique();
+				try
+				{
+					GestionCommandes.XMLCommande(PageDistributeurs.getDistributeurCourant());	
+				}
+				catch(Exception ex)
+				{
+					dispose();
+					JOptionPane.showMessageDialog(null, "Impossible d'éditer le distributeur ["+PageDistributeurs.getDistributeurCourant().getId()+"] .","Gestion des commandes",JOptionPane.ERROR_MESSAGE);
+				}
+				bouton_xml.bouttonNormal();
+				
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				
+						
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+		});
 		
 		id_distributeur.setBounds(20,20,200,20);
 		liste_distributeurs_page_distributeurs.setBounds(60, 20, 150, 20);
@@ -183,6 +231,7 @@ public class PageDistributeurs extends JFrame{
 		panel.add(variete_produit_commande_courante);
 		panel.add(type_produit_commande_courante);
 		panel.add(calibre_produit_commande_courante);
+		panel.add(bouton_xml);
 		
 	}
 	private void initialiserListeCommandes()
@@ -204,5 +253,9 @@ public class PageDistributeurs extends JFrame{
 				}
 			}
 		}
+	}
+	public static Distributeur getDistributeurCourant()
+	{
+		return distributeur_courant;
 	}
 }

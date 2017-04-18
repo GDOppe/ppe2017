@@ -38,7 +38,6 @@ public class GestionClique implements MouseListener{
 			}
 			catch(Exception ex)
 			{
-				ex.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Impossible d'afficher le menu des distributeurs.\nVeuillez vérifer votre connexion internet puis relancez l'application.","Gestion des commandes",JOptionPane.ERROR_MESSAGE);
 			}
 		}

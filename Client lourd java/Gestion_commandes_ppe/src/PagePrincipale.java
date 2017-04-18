@@ -99,6 +99,7 @@ public class PagePrincipale extends JFrame{
 		catch(Exception ex)
 		{
 			JOptionPane.showMessageDialog(null, "Impossible de se connecter à la base de données.\nVeuillez vérifer votre connexion internet puis relancez l'application.","Gestion des commandes",JOptionPane.ERROR_MESSAGE);
+			System.exit(0);
 		}
 	}
 		
