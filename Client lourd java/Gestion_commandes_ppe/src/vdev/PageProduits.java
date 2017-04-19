@@ -9,7 +9,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+/**
+*
+* Classe permettant l'affichage des produits
+* 
+* @author Giaquinto Raphael Dubrulle Gaetan Ostrowski Benjamin
+* @version 1.0
+* 
+*
+*/
 public class PageProduits extends JFrame {
 
 	private JComboBox<String> liste_produits_menu_produits;
@@ -21,7 +29,14 @@ public class PageProduits extends JFrame {
 	private Font police_distributeur;
 	private Color couleur_police;
 	private Produit produit_courant;
-	
+	/**
+	 * 
+	 * Création d'une fenêtre de 600x250 pour afficher les produits en détails<br><br>
+	 * Les id des produits sont stockées dans une liste déroulante<br>
+	 * Le reste des informations les concernants sont représentées via des labels
+	 * @throws Exception
+	 * 
+	 * */	
 	public PageProduits() throws Exception
 	{
 		liste_produits_menu_produits = new JComboBox<>();
@@ -34,7 +49,17 @@ public class PageProduits extends JFrame {
 		this.setAlwaysOnTop(true);
 		this.setVisible(true);
 	}
-	
+	/**
+	 * 
+	 * Initialisation des composants swing sur la fenêtre<br><br>
+	 * Initialisation de la liste des id des produits dans la liste, via la fonction chargeListeProduits<br><br>
+	 * A chaque sélection d'id dans la liste, les informations relatives au produit sont chargées dans les labels
+	 * 
+	 * @see PersistanceSQL
+	 * @throws Exception
+	 * 
+	 * 
+	 * */
 	public void initPanel() throws Exception
 	{
 		panel = new JPanel()

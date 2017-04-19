@@ -12,7 +12,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+/**
+*
+* Classe permettant l'affichage des distributeurs
+* 
+* @author Giaquinto Raphael Dubrulle Gaetan Ostrowski Benjamin
+* @version 1.0
+* 
+*
+*/
 public class PageDistributeurs extends JFrame{
 	
 	private JComboBox<String> liste_distributeurs_page_distributeurs;
@@ -33,7 +41,15 @@ public class PageDistributeurs extends JFrame{
 	private Color couleur_police;	
 	private static Distributeur distributeur_courant;
 
-		
+	/**
+	 * 
+	 * Création d'une fenêtre de 600x450 pour afficher les distributeurs en détails<br><br>
+	 * Les id des distributeurs sont stockées dans une liste déroulante<br>
+	 * Les id des commandes associés au distributeur courant, sont stockées dans une liste déroulante<br>
+	 * Le reste des informations concernants les distributeurs et ses commandes sont représentées via des labels
+	 * @throws Exception
+	 * 
+	 * */	
 	public PageDistributeurs() throws Exception
 	{			
 		liste_distributeurs_page_distributeurs = new JComboBox<>();
@@ -49,6 +65,19 @@ public class PageDistributeurs extends JFrame{
 		this.setVisible(true);
 		
 	}
+	/**
+	 * 
+	 * Initialisation des composants swing sur la fenêtre<br><br>
+	 * Initialisation de la liste des id des distributeurs, via la fonction chargeListeDistributeurs<br><br>
+	 * Initialisation de la liste des commandes du distributeur courant via la fonction getCommandes et chargerBase<br>
+	 * A chaque sélection d'id dans la liste des distributeurs, le distributeur courant change, et la liste des commandes est actualisée
+	 * 
+	 * @see PersistanceSQL
+	 * @see Distributeur
+	 * @throws Exception
+	 * 
+	 * 
+	 * */
 	private void initPanel() throws Exception
 	{
 		panel = new JPanel()

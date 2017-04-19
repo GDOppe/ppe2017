@@ -1,7 +1,7 @@
 package vdev;
 /**
  *
- * Classe principale du logiciel
+ * Classe principale du programme
  * 
  * @author Giaquinto Raphael Dubrulle Gaetan Ostrowski Benjamin
  * @version 1.0

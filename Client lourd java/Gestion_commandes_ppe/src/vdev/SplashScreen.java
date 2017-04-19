@@ -6,13 +6,31 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+/**
+*
+* Classe permettant l'affichage d'un écran de chargement
+* 
+* @author Giaquinto Raphael Dubrulle Gaetan Ostrowski Benjamin
+* @version 1.0
+* 
+*
+*/
 
 public class SplashScreen extends JFrame{
 	
 	private String progressionChargement = "";
 	private int secondesChargement = 0;
 	private static boolean enChargement = true;
+	
+	
+	/**
+	 * 
+	 * Création d'une fenêtre de 600x300<br><br>
+	 * Création d'un timer pour compter le nombre de seconde que l'application met à charger<br>
+	 * 
+	 * @throws Exception
+	 * 
+	 * */	
 	public SplashScreen()
 	{
             setSize(600, 300);

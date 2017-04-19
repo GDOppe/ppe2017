@@ -4,7 +4,15 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-
+/**
+*
+* Classe de gestion des cliques de la souris
+* 
+* @author Giaquinto Raphael Dubrulle Gaetan Ostrowski Benjamin
+* @version 1.0
+* 
+*
+*/
 public class GestionClique implements MouseListener{
 	
 
@@ -26,6 +34,34 @@ public class GestionClique implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+	/**
+	 * 
+	 * Vérification lors du clique de la souris<br><br>
+	 * 
+	 * <b>Lorsque le bouton est celui des distributeurs</b><br><br>
+	 * Création d'une nouvelle instance de PageDistributeurs et chargement de l'image de clique du bouton<br><br>
+	 * 
+	 * <b>Lorsque le bouton est celui des commandes</b><br><br>
+	 * Création d'une nouvelle instance de PageCommandes et chargement de l'image de clique du bouton<br><br>
+	 *
+	 * 
+	 * <b>Lorsque le bouton est celui des produits</b><br><br>
+	 * Création d'une nouvelle instance de PageProduits et chargement de l'image de clique du bouton<br><br>	 
+	 * 
+	 * <b>Lorsque le bouton est celui pour éditer les commandes non livrées du distributeur</b><br><br>
+	 * Création d'un fichier XML portant l'id et le nom du distributeur concerné, édition de ce dernier<br>
+	 * avec les informations concernant les commandes et chargement de l'image de clique du bouton<br><br>
+	 * 
+	 * @see GestionCommandes
+	 * @see BoutonDistributeur
+	 * @see BoutonCommandes
+	 * @see BoutonProduits
+	 * @see BoutonXML
+	 * @see PageDistributeurs
+	 * @see PageProduits
+	 * @see PageCommandes
+	 * 
+	 * */
 	@SuppressWarnings({ "deprecation", "unused" })
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -69,7 +105,14 @@ public class GestionClique implements MouseListener{
 		}
 
 	}
-	
+	/**
+	 * 
+	 * Vérification lorsque la pression est relachée sur un bouton<br><br>
+	 * 
+	 * Chargement de l'image normal des boutons
+	 * 
+	 * 
+	 * */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 

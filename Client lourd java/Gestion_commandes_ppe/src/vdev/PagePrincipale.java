@@ -7,18 +7,34 @@ import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+/**
+*
+* Classe permettant la création de la fenêtre principale de l'application
+* 
+* @author Giaquinto Raphael Dubrulle Gaetan Ostrowski Benjamin
+* @version 1.0
+* 
+*
+*/
 public class PagePrincipale extends JFrame{
 
 	private static JPanel panel;
 	private static BoutonCommandes bouton_commandes;
 	private static BoutonDistributeur bouton_distributeur;
 	private static BoutonProduits bouton_produits;
-	private static String menu_courant;
 	private static GestionClique clique = new GestionClique();
 	private static PersistanceSQL sql;
 
-
+	/**
+	 * 
+	 * Initialisation des composants swing sur la fenêtre<br><br>
+	 * Connexion à la base de données<br><br>
+	 * 
+	 * @see PersistanceSQL
+	 * @throws Exception
+	 * 
+	 * 
+	 * */
 	public PagePrincipale()
 	{
 		initConnexion();
@@ -70,27 +86,55 @@ public class PagePrincipale extends JFrame{
 			
 	}
 		
-	public static String getMenuCourant()
-	{
-		return menu_courant;
-	}
-
+	/**
+	 * 
+	 * Retourne le bouton des distributeurs
+	 * @return BoutonDistributeur
+	 * @see BoutonDistributeur
+	 * 
+	 * */
 	public static BoutonDistributeur getDistributeursBouton()
 	{
 		return bouton_distributeur;
 	}
+	/**
+	 * 
+	 * Retourne le bouton des commandes
+	 * @return BoutonCommandes
+	 * @see BoutonCommandes
+	 * 
+	 * */
 	public static BoutonCommandes getCommandesBouton()
 	{
 		return bouton_commandes;
 	}
+	/**
+	 * 
+	 * Retourne le bouton des produits
+	 * @return BoutonProduits
+	 * @see BoutonProduits
+	 * 
+	 * */
 	public static BoutonProduits getProduitsBouton()
 	{
 		return bouton_produits;
 	}
+	/**
+	 * 
+	 * Retourne l'objet sql
+	 * @return PersistanceSQL
+	 * @see PersistanceSQL
+	 * 
+	 * */
 	public static PersistanceSQL getSQL()
 	{
 		return sql;
 	}
+	/**
+	 * 
+	 * Tentative de connexion à la base de données en initialisant l'objet sql
+	 * @see PersistanceSQL
+	 * */
 	private void initConnexion()
 	{
 		try

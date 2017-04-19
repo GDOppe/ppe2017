@@ -5,16 +5,36 @@ import java.io.FileWriter;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
-
+/**
+ * 
+ * Classe permettant la gestion des commandes
+ * 
+ * @author Giaquinto Raphael Dubrulle Gaetan Ostrowski Benjamin
+ * @version 1.0
+ * 
+ * */
 public class GestionCommandes {
 
 	private PersistanceSQL les_donnees;
 	
+	/**
+	 * Attribution d'un objet PersistanceSQL pour pouvoir effectuer des opérations sur la base de données
+	 * 
+	 * @param les_donnees
+	 * @see PersistanceSQL
+	 * 
+	 * */
 	public GestionCommandes(PersistanceSQL les_donnees)
 	{
 		this.les_donnees = les_donnees;
 	}
-	
+	/**
+	 * Retrouve un distributeur dans la base de données via son id, avec la fonction chargerBase 
+	 * @param id_distributeur
+	 * @return Distributeur
+	 * @see PersistanceSQL
+	 * 
+	 * */
 	public Distributeur getDistributeur(String id_distributeur)
 	{
 		Distributeur le_distributeur = null;
@@ -29,6 +49,13 @@ public class GestionCommandes {
 			return le_distributeur;
 		}
 	}
+	/**
+	 * Retrouve une commande dans la base de données via son id, avec la fonction chargerBase
+	 * @param id_commande
+	 * @return Commande
+	 * @see PersistanceSQL
+	 * 
+	 * */
 	public Commande getCommande(String id_commande)
 	{
 		Commande la_commande = null;
@@ -43,6 +70,13 @@ public class GestionCommandes {
 			return la_commande;
 		}
 	}
+	/**
+	 * Retrouve un produit dans la base de données via son id, avec la fonction chargerBase
+	 * @param id_produit
+	 * @return Produit
+	 * @see PersistanceSQL
+	 * 
+	 * */
 	public Produit getProduit(String id_produit)
 	{
 		Produit le_produit = null;
@@ -57,10 +91,25 @@ public class GestionCommandes {
 			return le_produit;
 		}
 	}
+	/**
+	 * 
+	 * Retourne les_donnees
+	 * @return PersistanceSQL
+	 * 
+	 * */
 	public PersistanceSQL getPersistance()
 	{
 		return les_donnees;
 	}
+	/**
+	 * 
+	 * Edite un fichier XML comportant les commandes non livrées d'un distributeur et l'enregistre dans un répertoire 'Commandes'
+	 * 
+	 * @param distributeur
+	 * @see Distributeur
+	 * @throws IOException
+	 * 
+	 * */
 	public static void XMLCommande(Distributeur distributeur) throws Exception
 	{
 		

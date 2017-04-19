@@ -3,9 +3,16 @@ package vdev;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-
+/**
+*
+* Classe permettant de charger les images nécessaires au fonctionnement de l'application
+* 
+* @author Giaquinto Raphael Dubrulle Gaetan Ostrowski Benjamin
+* @version 1.0
+* 
+*
+*/
 public  class GestionRessources {
 	
 	//Images de fond
@@ -21,7 +28,11 @@ public  class GestionRessources {
 	private static BufferedImage genererXML;
 	private static BufferedImage genererXMLHover;
 
-	
+	/**
+	 * 
+	 * Charge les images de l'application
+	 * 
+	 * */
 	public  void chargerImages()
 	{
 		SplashScreen  pageChargement = new SplashScreen();
@@ -50,43 +61,92 @@ public  class GestionRessources {
 			System.exit(0);
 		}
 	}
-
+	/**
+	 * Retourne le logo de l'application
+	 * @return BufferedImage
+	 * 
+	 * */
 	public static BufferedImage getLogo()
 	{
 		return logo;
 	}
+	/**
+	 * Retourne l'image de fond de l'application
+	 * @return BufferedImage
+	 * 
+	 * */
 	public static BufferedImage getPrincipale()
 	{
 		return principale;
 	}
+	/**
+	 * Retourne l'image du bouton des distributeurs
+	 * @return BufferedImage
+	 * 
+	 * */
 	public static BufferedImage getDistributeursBouton()
 	{
 		return distributeursBouton;
 	}
+	/**
+	 * Retourne l'image du bouton des commandes
+	 * @return BufferedImage
+	 * 
+	 * */
 	public static BufferedImage getCommandesBouton()
 	{
 		return commandesBouton;
 	}
+	/**
+	 * Retourne l'image du bouton des produits
+	 * @return BufferedImage
+	 * 
+	 * */
 	public static BufferedImage getProduitsBouton()
 	{
 		return produitsBouton;
 	}
+	/**
+	 * Retourne l'image du bouton des distributeurs lorsqu'un clique est effectué
+	 * @return BufferedImage
+	 * 
+	 * */
 	public static BufferedImage getDistributeursBoutonHover()
 	{
 		return distributeursBoutonHover;
 	}
+	/**
+	 * Retourne l'image du bouton des commandes lorsqu'un clique est effectué
+	 * @return BufferedImage
+	 * 
+	 * */
 	public static BufferedImage getCommandesBoutonHover()
 	{
 		return commandesBoutonHover;
 	}
+	/**
+	 * Retourne l'image du bouton des produits lorsqu'un clique est effectué
+	 * @return BufferedImage
+	 * 
+	 * */
 	public static BufferedImage getProduitsBoutonHover()
 	{
 		return produitsBoutonHover;
 	}
+	/**
+	 * Retourne l'image du bouton d'édition de l'XML 
+	 * @return BufferedImage
+	 * 
+	 * */
 	public static BufferedImage getGenererXML()
 	{
 		return genererXML;
 	}
+	/**
+	 * Retourne l'image du bouton d'édition de l'XML lorsqu'un clique est effectué
+	 * @return BufferedImage
+	 * 
+	 * */
 	public static BufferedImage getGenererXMLHover()
 	{
 		return genererXMLHover;

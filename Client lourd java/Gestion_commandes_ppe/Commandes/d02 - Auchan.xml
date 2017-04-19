@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commandes idDistributeur="d02" xmlns:xlink="http://www.w3.org/1999/xlink">
+<commande id="9">
+<produit variete="espagnole" type="sechée" calibre="10" />
+<conditionnement type="seau" />
+<quantite>10</quantite>
+<date_conditionnement>2017-02-16</date_conditionnement>
+<date_envoi>null</date_envoi>
+</commande>
+</commandes>

@@ -9,7 +9,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+/**
+*
+* Classe permettant l'affichage des commandes
+* 
+* @author Giaquinto Raphael Dubrulle Gaetan Ostrowski Benjamin
+* @version 1.0
+* 
+*
+*/
 public class PageCommandes extends JFrame{
 	
 	private JComboBox<String> liste_commandes_page_commandes;
@@ -27,6 +35,14 @@ public class PageCommandes extends JFrame{
 	private Color couleur_police;
 	private Commande commande_courante;
 	
+	/**
+	 * 
+	 * Création d'une fenêtre de 600x450 pour afficher les commandes en détails<br><br>
+	 * Les id des commandes sont stockées dans une liste déroulante<br>
+	 * Le reste des informations les concernants sont représentées via des labels
+	 * @throws Exception
+	 * 
+	 * */
 	public PageCommandes() throws Exception
 	{
 		liste_commandes_page_commandes = new JComboBox<>();
@@ -41,6 +57,17 @@ public class PageCommandes extends JFrame{
 		this.setAlwaysOnTop(true);
 		this.setVisible(true);
 	}
+	/**
+	 * 
+	 * Initialisation des composants swing sur la fenêtre<br><br>
+	 * Initialisation de la liste des id des commandes dans la liste, via la fonction chargeListeCommandes<br><br>
+	 * A chaque sélection d'id dans la liste, les informations relatives à la commande sont chargées dans les labels
+	 * 
+	 * @see PersistanceSQL
+	 * @throws Exception
+	 * 
+	 * 
+	 * */
 	public void initPanel() throws Exception
 	{
 		police_distributeur = new Font("Verdana",0,18);
