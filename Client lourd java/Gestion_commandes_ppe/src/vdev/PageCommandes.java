@@ -54,7 +54,6 @@ public class PageCommandes extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setIconImage(GestionRessources.getLogo());
 		this.setContentPane(panel);		
-		this.setAlwaysOnTop(true);
 		this.setVisible(true);
 	}
 	/**

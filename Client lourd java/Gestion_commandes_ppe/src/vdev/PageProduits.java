@@ -46,7 +46,6 @@ public class PageProduits extends JFrame {
 		this.setResizable(false);
 		this.setLocationRelativeTo(this.getParent());
 		this.setContentPane(panel);
-		this.setAlwaysOnTop(true);
 		this.setVisible(true);
 	}
 	/**
