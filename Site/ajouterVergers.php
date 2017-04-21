@@ -4,7 +4,7 @@
 session_start();
 
 //Connexion à la base de données
-$bdd = new PDO('mysql:host=localhost;dbname=ppe;charset=utf8', 'root', 'root');
+$bdd = new PDO('mysql:host=localhost;dbname=vdev;charset=utf8', 'root', 'root');
 
 $erreur="";
 

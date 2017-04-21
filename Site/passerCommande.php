@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$bdd = new PDO('mysql:host=localhost;dbname=ppe;charset=utf8', 'root', 'root');
+$bdd = new PDO('mysql:host=localhost;dbname=vdev;charset=utf8', 'root', 'root');
 
 $mail=$_SESSION['mail'];
 $erreur="";
@@ -17,13 +17,14 @@ if(isset($_POST['validerCommande'])){
   $variete = $_POST['variete'];
   $calibre=$_POST['calibre'];
   $qte=$_POST['qte'];
+  $typeProduit=$_POST['typeProduit'];
   $typeCond=$_POST['typeCond'];
   $dateCond=$_POST['dateCond'];
   $dateLivraison=$_POST['dateLivraison'];
   
 
   if(!empty($nomProd) && !empty($calibre) && !empty($qte) && !empty($typeCond) && !empty($dateCond) && !empty($dateLivraison)){
-    $bdd->exec("INSERT INTO commande(nomProd, nomClient, varieteNoix, calibre, quantite, type, dateCond, dateLiv) VALUES('$nomProd', '$nomClient', '$variete', $calibre,  $qte, '$typeCond', '$dateCond', '$dateLivraison')");
+    $bdd->exec("INSERT INTO commande(nomProd, nomClient, varieteNoix, calibre, quantite,typeProduit, typeCond, dateCond, dateLiv) VALUES('$nomProd', '$nomClient', '$variete', $calibre,  $qte, '$typeProduit','$typeCond', '$dateCond', '$dateLivraison')");
     header('Location: view_user.php');
     exit();
   }
@@ -211,12 +212,18 @@ if(isset($_POST['validerCommande'])){
                       <!--<span class="help-block">Type de conditionnement</span>  -->
                       </div>
                     </div>
-
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="typeProduit">Calibre</label>  
+                      <div class="col-md-4">
+                      <input id="typeProduit" name="typeProduit" type="text" placeholder="Type de produit" class="form-control input-md">
+                      <!--<span class="help-block">Type de conditionnement</span>  -->
+                      </div>
+                    </div>
                     <!-- Text input-->
                     <div class="form-group">
                       <label class="col-md-4 control-label" for="typeCond">Type conditionnement</label>  
                       <div class="col-md-4">
-                      <input id="typeCond" name="typeCond" type="text" placeholder="Type" class="form-control input-md">
+                      <input id="typeCond" name="typeCond" type="text" placeholder="Type de conditionnement" class="form-control input-md">
                       <!--<span class="help-block">Type de conditionnement</span>  -->
                       </div>
                     </div>

@@ -3,7 +3,7 @@
 session_start();
 
 //Connexion à la base de données
-$bdd = new PDO('mysql:host=localhost;dbname=ppe;charset=utf8', 'root', 'root');
+$bdd = new PDO('mysql:host=localhost;dbname=vdev;charset=utf8', 'root', 'root');
 
 $mail = $_SESSION['mail'];
 
@@ -78,8 +78,8 @@ $nbVergers=$donneesVergers['nbVerger'];
                         <p>
                             <ul>
                                 <li>Certification : <?php if($idCertif == 0): echo "Aucune certification"; else: echo "Agriculteur biologique"; endif; ?></li>
-                                <li>Adhérent : <?php if($dateAdherent == "2000-01-01"): echo "Non"; else : echo "Oui"; endif; ?></li>
-                                <?php if($dateAdherent == "2000-01-01"): echo ""; else : echo "<li>Date adhésion : ".$dateAdherent."</li>"; endif; ?>
+                                <li>Adhérent : <?php if(is_null($dateAdherent)): echo "Non"; else : echo "Oui"; endif; ?></li>
+                                <?php if(is_null($dateAdherent)): echo ""; else : echo "<li>Date adhésion : ".$dateAdherent."</li>"; endif; ?>
                             </ul>
                         </p>
                     </div>
@@ -200,6 +200,7 @@ $nbVergers=$donneesVergers['nbVerger'];
                                     <th>Variété Noix</th>
                                     <th>Calibre (en mm)</th>
                                     <th>Quantité</th>
+                                    <th>Type de produit</th>
                                     <th>Type de conditionnement</th>
                                     <th>Date de conditionnement</th>
                                     <th>Date de livraison</th>
@@ -207,7 +208,7 @@ $nbVergers=$donneesVergers['nbVerger'];
                                 </tr>
                                 <?php
 
-                                    $reqCommande = $bdd->query('SELECT commande.idCommande, commande.nomClient, commande.varieteNoix, commande.calibre, commande.quantite, commande.type, commande.dateCond, commande.dateLiv FROM commande, producteur WHERE commande.nomProd=producteur.nom and producteur.mail = \''.$mail.'\'');
+                                    $reqCommande = $bdd->query('SELECT commande.idCommande, commande.nomClient, commande.varieteNoix, commande.calibre, commande.quantite, commande.typeProduit, commande.typeCond, commande.dateCond, commande.dateLiv FROM commande, producteur WHERE commande.nomProd=producteur.nom and producteur.mail = \''.$mail.'\'');
 
                                     while($tab = $reqCommande->fetch()){
                                         /*$timestamp = strtotime($tab['dateCond']);
@@ -222,7 +223,8 @@ $nbVergers=$donneesVergers['nbVerger'];
                                             echo "<th>".$tab['varieteNoix']."</th>";
                                             echo "<th>".$tab['calibre']."</th>";
                                             echo "<th>".$tab['quantite']."</th>";
-                                            echo "<th>".$tab['type']."</th>";
+                                            echo "<th>".$tab['typeProduit']."</th>";
+                                            echo "<th>".$tab['typeCond']."</th>";
                                             echo "<th>".$tab['dateCond']."</th>";
                                             echo "<th>".$tab['dateLiv']."</th>";
                                         echo "</tr>";

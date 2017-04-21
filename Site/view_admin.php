@@ -2,7 +2,7 @@
 
 session_start();
 
-$bdd = new PDO('mysql:host=localhost;dbname=ppe;charset=utf8', 'root', 'root');
+$bdd = new PDO('mysql:host=localhost;dbname=vdev;charset=utf8', 'root', 'root');
 
 
 ?>
@@ -87,7 +87,7 @@ $bdd = new PDO('mysql:host=localhost;dbname=ppe;charset=utf8', 'root', 'root');
                                             echo "<th>".$tab['mail']."</th>";
                                             echo "<th>".$tab['adresse']."</th>";
                                             echo "<th>".$tab['tel']."</th>";
-                                            if($tab['dateAdherent'] == "2000-01-01"){
+                                            if(is_null($tab['dateAdherent'])){
                                                 echo "<th> Non adhérent </th>";
                                             }
                                             else{

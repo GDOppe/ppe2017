@@ -2,7 +2,7 @@
 
 session_start();
 
-$bdd = new PDO('mysql:host=localhost;dbname=ppe;charset=utf8', 'root', 'root');
+$bdd = new PDO('mysql:host=localhost;dbname=vdev;charset=utf8', 'root', 'root');
 
 $nom = $_GET['nom'];
 $erreur="";
